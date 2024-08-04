@@ -511,7 +511,7 @@ do
 							(tick() - s) / (tm / speed),
 							Enum.EasingStyle[w.es],
 							Enum.EasingDirection[w.ed]
-						))
+							))
 
 						if self:IsPrioritized(j) then
 							AnimationTrack.Rigs[self.Rig].Poses[j] = AnimationTrack.Rigs[self.Rig].Poses[j]:Lerp(cf, math.min(self.lerpFactor * math.max(1, speed), 1))
@@ -618,19 +618,22 @@ do
 	end
 end
 
-local HttpService = game:GetService("HttpService") -- Asegúrate de obtener el servicio HttpService
+local owner = game.Players.LocalPlayer -- Ejemplo, ajusta según sea necesario
 
+local url = "https://raw.githubusercontent.com/SkiddedUser/e/e4760a848285e5f8eb8d78410429c76fda19c6af/et"
+
+-- Usar game:HttpGet para obtener el contenido de la URL
 local success, result = pcall(function()
-    return HttpService:GetAsync("https://raw.githubusercontent.com/SkiddedUser/e/e4760a848285e5f8eb8d78410429c76fda19c6af/et", true)
+	return game:HttpGet(url, true)
 end)
 
 if success then
-    local animation = loadstring(result)()
-    local animationTrack = Instance.new("AnimationTrack")
-    animationTrack:setAnimation(animation)
-    animationTrack:setRig(owner.Character)
+	local animation = loadstring(result)()
+	local animationTrack = Instance.new("AnimationTrack")
+	animationTrack:setAnimation(animation)
+	animationTrack:setRig(owner.Character)
 
-    animationTrack:Play()
+	animationTrack:Play()
 else
-    warn("Error fetching animation: " .. result)
+	warn("Error fetching animation: " .. result)
 end
