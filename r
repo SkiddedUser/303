@@ -618,4 +618,9 @@ do
 	end
 end
 
-return AnimationTrack
+local animation = loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/SkiddedUser/e/e4760a848285e5f8eb8d78410429c76fda19c6af/et", true))()
+local animationTrack = AnimationTrack.new()
+animationTrack:setAnimation(animation)
+animationTrack:setRig(owner.Character)
+
+animationTrack:Play()
