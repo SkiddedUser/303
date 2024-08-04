@@ -618,9 +618,19 @@ do
 	end
 end
 
-local animation = loadstring(HttpService:GetAsync("https://raw.githubusercontent.com/SkiddedUser/e/e4760a848285e5f8eb8d78410429c76fda19c6af/et", true))()
-local animationTrack = AnimationTrack.new()
-animationTrack:setAnimation(animation)
-animationTrack:setRig(owner.Character)
+local HttpService = game:GetService("HttpService") -- Asegúrate de obtener el servicio HttpService
 
-animationTrack:Play()
+local success, result = pcall(function()
+    return HttpService:GetAsync("https://raw.githubusercontent.com/SkiddedUser/e/e4760a848285e5f8eb8d78410429c76fda19c6af/et", true)
+end)
+
+if success then
+    local animation = loadstring(result)()
+    local animationTrack = Instance.new("AnimationTrack")
+    animationTrack:setAnimation(animation)
+    animationTrack:setRig(owner.Character)
+
+    animationTrack:Play()
+else
+    warn("Error fetching animation: " .. result)
+end
