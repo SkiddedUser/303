@@ -1,5 +1,5 @@
 --[[
-	mech's anitracker
+	mech's anitrackere
 	i know i suck at names
 
 	how to use:
